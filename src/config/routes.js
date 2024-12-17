@@ -4,15 +4,20 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
+import Home from "../pages/Home";
 
 const router = createBrowserRouter([
     {
         path: "/",
+        Component: Home,
+    },
+    {
+        path: "/app",
         Component: App,
         // loader: rootLoader,
         children: [
             {
-                path: "profile",
+                path: "/app/profile",
                 Component: Profile,
                 // loader: teamLoader,
             },
