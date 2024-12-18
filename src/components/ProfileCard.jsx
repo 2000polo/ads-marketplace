@@ -2,8 +2,14 @@ import { Avatar, Box, Button, Card, Flex, Text } from '@radix-ui/themes'
 import React from 'react'
 import { IoMailOutline } from 'react-icons/io5';
 import { LuMapPin, LuPhone } from 'react-icons/lu';
+import { useSelector } from 'react-redux';
 
 const ProfileCard = () => {
+
+    const { firstName, lastName, email, phone, location, username, image } = useSelector((state) => state.auth?.user);
+
+    // console.log("currentUser", currentUser)
+
     return (
         <Box minWidth="240px">
             <Card className='shadow-md' size={'3'}>
@@ -11,16 +17,16 @@ const ProfileCard = () => {
                     <Flex gap="3" align="center" >
                         <Avatar
                             size="5"
-                            src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
+                            src={image ? image : "https://img.freepik.com/premium-photo/software-engineer-digital-avatar-generative-ai_934475-8997.jpg"}
                             radius="full"
                             fallback="T"
                         />
                         <Box>
                             <Text as="div" size="2" weight="bold">
-                                Teodros Girmay
+                                {firstName ? firstName : username}
                             </Text>
                             <Text as="div" size="2" color="gray">
-                                Engineering
+                                Member Since
                             </Text>
                             <Text as="div" size="2" color="gray">
                                 2019
@@ -32,9 +38,9 @@ const ProfileCard = () => {
                     </Box>
                 </Flex>
                 <Flex gap={'5'} className='pt-3 text-gray-700' >
-                    <Text className='flex gap-2 items-center' size={'2'}><LuMapPin /> Ash Dr. San Jose, South Dakota</Text>
-                    <Text className='flex gap-2 items-center' size={'2'}><IoMailOutline /> support@Xgenious.com</Text>
-                    <Text className='flex gap-2 items-center' size={'2'}><LuPhone /> (480) 555-0103</Text>
+                    <Text className='flex gap-2 items-center' size={'2'}><LuMapPin /> {location ? location : 'N/A'}</Text>
+                    <Text className='flex gap-2 items-center' size={'2'}><IoMailOutline /> {email ? email : 'N/A'}</Text>
+                    <Text className='flex gap-2 items-center' size={'2'}><LuPhone /> {phone ? phone : 'N/A'}</Text>
                 </Flex>
             </Card>
         </Box>

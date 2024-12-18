@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginUser, registerUser } from '../api/user';
+import { fetchUserProfile, loginUser, registerUser, updateUserProfile } from '../api/user';
 
 const initialState = {
     token: null,
@@ -45,6 +45,41 @@ export const signup = createAsyncThunk(
     }
 );
 
+export const editUserProfile = createAsyncThunk(
+    'auth/editUserProfile',
+    async (payload, { rejectWithValue }) => {
+        try {
+            const response = await updateUserProfile(payload);
+            if (response.status === 200) {
+                // window.location.href = '/auth/login';
+                return response.data;
+            } else {
+                return rejectWithValue('Invalid user data');
+            }
+        } catch (error) {
+            return rejectWithValue(error.message || 'Something went wrong');
+        }
+    }
+);
+
+export const getCurrentUser = createAsyncThunk(
+    'auth/getCurrentUser',
+    async (payload, { rejectWithValue }) => {
+        try {
+            const response = await fetchUserProfile();
+            if (response.status === 200) {
+                // window.location.href = '/auth/login';
+                return response.data;
+            } else {
+                return rejectWithValue('Invalid user data');
+            }
+        } catch (error) {
+            return rejectWithValue(error.message || 'Something went wrong');
+        }
+    }
+);
+
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -84,6 +119,34 @@ const authSlice = createSlice({
                 state.loading = false;
             })
             .addCase(signup.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+
+        builder
+            .addCase(editUserProfile.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(editUserProfile.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(editUserProfile.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+
+        builder
+            .addCase(getCurrentUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getCurrentUser.fulfilled, (state, action) => {
+                console.log("getuserpayload", action)
+                state.loading = false;
+                state.user = action.payload;
+            })
+            .addCase(getCurrentUser.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });

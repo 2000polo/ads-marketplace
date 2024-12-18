@@ -4,6 +4,7 @@ import AdCard from '../components/AdCard'
 import { Flex } from '@radix-ui/themes'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdPosts } from '../features/adSlice'
+import { getCurrentUser } from '../features/authSlice'
 
 const MyAccount = () => {
 
@@ -17,6 +18,7 @@ const MyAccount = () => {
         if (dispatch) {
             console.log("useEffec worked")
             dispatch(getAdPosts())
+            dispatch(getCurrentUser())
         }
     }, [dispatch])
 
