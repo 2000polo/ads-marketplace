@@ -9,6 +9,7 @@ import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
 import AppLayout from "../layouts/AppLayout";
 import MyAccount from "../pages/MyAccount";
+import AddPost from "../pages/AddPost";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
             {
                 path: "/app/account",
                 Component: MyAccount,
+                // loader: teamLoader,
+            },
+            {
+                path: "/app/post-ad",
+                Component: AddPost,
                 // loader: teamLoader,
             },
         ],

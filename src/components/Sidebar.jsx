@@ -36,7 +36,7 @@ const Sidebar = () => {
             <ul className='flex flex-col gap-0 p-6 bg-white h-full rounded-lg min-h-[450px]'>
                 {
                     sideMenuData?.map(({ path, label, isHighlight }) => {
-                        return <li className={`pl-9 font-medium ${location?.pathname?.includes(path) ? 'bg-black text-white' : 'bg-transparent text-gray-800'} p-4 rounded-full ${isHighlight && 'text-pink-600'} `}><Link to={path} >{label}</Link></li>
+                        return <li className={`pl-9 font-medium ${location?.pathname?.includes(path) ? 'bg-black text-white' : `bg-transparent  ${isHighlight ? 'text-pink-600' : 'text-gray-800'}`} p-4 rounded-full  `}><Link to={path} >{label}</Link></li>
                     })
                 }
             </ul>

@@ -5,7 +5,12 @@ export const fetchPublicAds = () => {
     return axiosInstance.get('/api/advertisements')
 }
 
-export const createAd = () => {
+export const createAd = (payload) => {
     console.log("fetchPublicAds worked")
-    return axiosInstance.get('/api/advertisements?apiKey=dd57ae2d-91c1-4f65-9b56-267f3e42aa5c')
+    return axiosInstance.post('/api/advertisements', {
+        "title": payload.title,        // Title of the advertisement
+        "price": payload.price,        // Price of the item
+        "description": payload.description,  // Description of the advertisement
+        "image": payload.image         // URL or base64 encoded image
+    });
 }

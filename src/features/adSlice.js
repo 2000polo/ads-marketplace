@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchPublicAds } from "../api/ads";
+import { createAd, fetchPublicAds } from "../api/ads";
 
 const initialState = {
     adsList: undefined,
@@ -13,6 +13,21 @@ export const getAdPosts = createAsyncThunk(
         try {
             console.log('getAsPosts worked')
             const response = await fetchPublicAds();
+            if (response.status === 200) {
+                return response
+            }
+        } catch (error) {
+            return rejectWithValue(error.message || 'Something went wrong');
+        }
+    }
+)
+
+export const postAdd = createAsyncThunk(
+    'ads/postAdd',
+    async (payload, { rejectWithValue }) => {
+        try {
+            console.log('getAsPosts worked')
+            const response = await createAd(payload);
             if (response.status === 200) {
                 return response
             }
