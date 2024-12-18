@@ -2,8 +2,12 @@ import { Button, Heading } from '@radix-ui/themes'
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as Form from '@radix-ui/react-form';
+import { useDispatch } from 'react-redux';
+import { login } from '../features/authSlice';
 
 const SignUpForm = () => {
+
+    const dispatch = useDispatch();
 
     const {
         register,
@@ -12,7 +16,9 @@ const SignUpForm = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log('Form Submitted:', data);
+
+        // console.log('Form Submitted:', data);
+        dispatch(login(data));
         // Handle login logic here (e.g., API call)
     };
 
