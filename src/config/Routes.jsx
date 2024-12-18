@@ -10,6 +10,7 @@ import SignUpForm from "../components/SignUpForm";
 import AppLayout from "../layouts/AppLayout";
 import MyAccount from "../pages/MyAccount";
 import AddPost from "../pages/AddPost";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -23,19 +24,24 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/app/profile",
-                Component: Profile,
-                // loader: teamLoader,
+                element: <ProtectedRoute >
+                    <Profile />
+                </ProtectedRoute>
             },
             {
                 path: "/app/account",
-                Component: MyAccount,
+                element: <ProtectedRoute >
+                    <MyAccount />
+                </ProtectedRoute>
                 // loader: teamLoader,
             },
             {
                 path: "/app/post-ad",
-                Component: AddPost,
+                element: <ProtectedRoute >
+                    <AddPost />
+                </ProtectedRoute>
                 // loader: teamLoader,
-            },
+            }
         ],
     },
     {

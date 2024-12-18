@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import logo from '../assets/logo.png';
@@ -7,6 +7,10 @@ import authImage from '../assets/auth-img.png';
 import { Button, Card, Flex, Heading, Section, Text } from '@radix-ui/themes'
 
 const AuthLayout = () => {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
     return (
         <div>
             <Header />
@@ -23,14 +27,32 @@ const AuthLayout = () => {
                         </Section>
                         <Section className='w-1/2 flex items-center justify-center flex-col text-center gap-3 bg-[#F50964]/10'>
                             <img src={authImage} alt="" />
-                            <Heading className=''>Don't have an account<span className='text-[#F50963]'>?</span></Heading>
-                            <Text className='w-1/2'>
-                                Listbnb a Largest Classified Listing Marketplace offers perfect
-                                Ads classifieds...
-                            </Text>
-                            <Button className='w-full mt-5' size={'3'} radius='full'>
-                                Register
-                            </Button>
+                            {
+                                location?.pathname?.includes('login') ?
+                                    <>
+                                        <Heading className=''>Don't have an account<span className='text-[#F50963]'>?</span></Heading>
+                                        <Text className='w-1/2'>
+                                            Listbnb a Largest Classified Listing Marketplace offers perfect
+                                            Ads classifieds...
+                                        </Text>
+                                        <Button onClick={() => navigate('/auth/sign-up')} className='w-full mt-5' size={'3'} radius='full'>
+                                            Register
+                                        </Button>
+
+                                    </>
+                                    :
+                                    <>
+                                        <Heading className=''>Already Have an Account<span className='text-[#F50963]'>?</span></Heading>
+                                        <Text className='w-1/2'>
+                                            Listbnb a Largest Classified Listing Marketplace offers perfect
+                                            Ads classifieds...
+                                        </Text>
+                                        <Button onClick={() => navigate('/auth/login')} className='w-full mt-5' size={'3'} radius='full'>
+                                            Login
+                                        </Button>
+
+                                    </>
+                            }
                         </Section>
                     </Flex>
                 </Card>

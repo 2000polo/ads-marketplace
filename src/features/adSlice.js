@@ -50,10 +50,25 @@ const adSlice = createSlice({
                     state.error = null
             })
             .addCase(getAdPosts.fulfilled, (state, { payload }) => {
-                console.log('priting payload', payload)
-                state.adsList = payload.data
+                console.log('priting payload', payload);
+                state.loading = false,
+                    state.adsList = payload.data
             })
             .addCase(getAdPosts.rejected, (state, action) => {
+                state.loading = false;
+                state.error = 'Something went wrong!';
+            });
+        builder.
+            addCase(postAdd.pending, (state) => {
+                state.loading = true,
+                    state.error = null
+            })
+            .addCase(postAdd.fulfilled, (state, { payload }) => {
+                console.log('priting payload', payload);
+                state.loading = false,
+                    state.adsList = payload.data
+            })
+            .addCase(postAdd.rejected, (state, action) => {
                 state.loading = false;
                 state.error = 'Something went wrong!';
             });

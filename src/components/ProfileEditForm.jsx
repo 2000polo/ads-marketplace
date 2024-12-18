@@ -8,7 +8,7 @@ import { FiInfo } from 'react-icons/fi';
 
 const ProfileEditForm = () => {
 
-    const { loading, error } = useSelector((state) => state.ads)
+    const { loading, error } = useSelector((state) => state.auth)
     const dispatch = useDispatch();
 
     const {

@@ -1,10 +1,14 @@
 import { Card } from '@radix-ui/themes';
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { logout } from '../features/authSlice';
+import { useDispatch } from 'react-redux';
 
 const Sidebar = () => {
 
     const location = useLocation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const sideMenuData = [
         {
@@ -23,13 +27,14 @@ const Sidebar = () => {
             label: "Post Ad",
             path: 'post-ad',
             isHighlight: true,
-        },
-        {
-            label: "Logout",
-            // path: '/post-ad',
-            // isHighlight: true,
-        },
+        }
     ]
+
+    const logoutHandler = () => {
+        dispatch(logout());
+        navigate('auth/login')
+        // return <Navigate to="/auth/login" />
+    }
 
     return (
         <Card className='shadow-md'>
@@ -39,6 +44,7 @@ const Sidebar = () => {
                         return <li className={`pl-9 font-medium ${location?.pathname?.includes(path) ? 'bg-black text-white' : `bg-transparent  ${isHighlight ? 'text-pink-600' : 'text-gray-800'}`} p-4 rounded-full  `}><Link to={path} >{label}</Link></li>
                     })
                 }
+                <li className={`pl-9 font-medium bg-transparent  text-gray-800 p-4 rounded-full  `}><Link onClick={() => logoutHandler()} >Logout</Link></li>
             </ul>
         </Card>
     )

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ProfileCard from '../components/ProfileCard'
 import AdCard from '../components/AdCard'
-import { Flex } from '@radix-ui/themes'
+import { Flex, Text } from '@radix-ui/themes'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdPosts } from '../features/adSlice'
 import { getCurrentUser } from '../features/authSlice'
@@ -26,10 +26,12 @@ const MyAccount = () => {
         <Flex gap={'4'} direction={'column'}>
             <ProfileCard />
             {
-                adsStore.adsList?.map((ad) => {
+                adsStore.adsList?.length > 0 ? adsStore.adsList.map((ad) => {
                     return <AdCard data={ad} />
-                })
+                }) :
+                    <Text className='text-center mt-12'>No ads to diplay</Text>
             }
+
         </Flex>
     )
 }
