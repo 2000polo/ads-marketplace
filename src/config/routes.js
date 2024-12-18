@@ -7,6 +7,8 @@ import Profile from "../pages/Profile";
 import Home from "../pages/Home";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
+import AppLayout from "../layouts/AppLayout";
+import MyAccount from "../pages/MyAccount";
 
 const router = createBrowserRouter([
     {
@@ -15,12 +17,17 @@ const router = createBrowserRouter([
     },
     {
         path: "/app",
-        Component: App,
+        Component: AppLayout,
         // loader: rootLoader,
         children: [
             {
                 path: "/app/profile",
                 Component: Profile,
+                // loader: teamLoader,
+            },
+            {
+                path: "/app/account",
+                Component: MyAccount,
                 // loader: teamLoader,
             },
         ],

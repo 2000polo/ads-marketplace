@@ -4,6 +4,7 @@ import { loginUser, registerUser } from '../api/user';
 const initialState = {
     token: null,
     isAuthenticated: false,
+    user: {},
     loading: false,
     error: null,
 };
@@ -14,8 +15,10 @@ export const login = createAsyncThunk(
         try {
             const response = await loginUser(email, password);
             if (response.status === 200) {
+                console.log(response)
                 window.location.href = '/app/profile';
-                return response.jwt;
+                window.localStorage.setItem('token', response.data.jwt)
+                return response.data;
             } else {
                 return rejectWithValue('Invalid credentials');
             }
@@ -60,8 +63,10 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(login.fulfilled, (state, action) => {
+                console.log(action.payload)
                 state.loading = false;
-                state.token = action.payload;
+                state.token = action.payload.jwt;
+                state.user = action.payload?.data;
                 state.isAuthenticated = true;
             })
             .addCase(login.rejected, (state, action) => {
