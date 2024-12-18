@@ -31,6 +31,7 @@ export const signup = createAsyncThunk(
         try {
             const response = await registerUser(username, email, password);
             if (response.status === 200) {
+                window.location.href = '/auth/login';
                 return response.data;
             } else {
                 return rejectWithValue('Invalid user data');
