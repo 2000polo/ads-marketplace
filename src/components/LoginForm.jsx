@@ -1,13 +1,17 @@
-import { Button, Heading } from '@radix-ui/themes'
+import { Button, Callout, Heading } from '@radix-ui/themes'
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as Form from '@radix-ui/react-form';
 import { login } from '../features/authSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { FiInfo } from 'react-icons/fi';
 
 const LoginForm = () => {
 
     const dispatch = useDispatch();
+    const { error, loading } = useSelector((state) => state.auth);
+
+    console.log("global state", error, loading);
 
     const {
         register,
@@ -24,6 +28,17 @@ const LoginForm = () => {
     return (
         <>
             <Heading className='w-1/3'>Login To Your Account</Heading>
+            {
+                (error !== null) &&
+                <Callout.Root color="red">
+                    <Callout.Icon>
+                        <FiInfo />
+                    </Callout.Icon>
+                    <Callout.Text>
+                        Incorrect username or pasword
+                    </Callout.Text>
+                </Callout.Root >
+            }
             <div className='w-[75%]'>
                 <Form.Root onSubmit={handleSubmit(onSubmit)} className='grid gap-3 w-full'>
                     {/* Email Field */}
@@ -103,7 +118,7 @@ const LoginForm = () => {
                                     >
                                         Login
                                     </button> */}
-                        <Button className='w-full' size={'3'} radius='full'>
+                        <Button loading={loading} className='w-full' size={'3'} radius='full'>
                             Login
                         </Button>
                     </Form.Submit>

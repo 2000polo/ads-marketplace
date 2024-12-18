@@ -3,7 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as Form from '@radix-ui/react-form';
 import { useDispatch } from 'react-redux';
-import { login } from '../features/authSlice';
+import { login, signup } from '../features/authSlice';
 
 const SignUpForm = () => {
 
@@ -17,8 +17,8 @@ const SignUpForm = () => {
 
     const onSubmit = (data) => {
 
-        // console.log('Form Submitted:', data);
-        dispatch(login(data));
+        console.log('Form Submitted:', data);
+        dispatch(signup(data));
         // Handle login logic here (e.g., API call)
     };
 
@@ -121,7 +121,7 @@ const SignUpForm = () => {
                             <Form.Label style={{ marginBottom: '5px' }}>Confirm Password</Form.Label>
                             <Form.Control asChild>
                                 <input
-                                    type="re-password"
+                                    type="password"
                                     placeholder="Enter your password"
                                     {...register('re-password', {
                                         required: 'Password is required',
