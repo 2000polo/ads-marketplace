@@ -5,6 +5,8 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
 import Home from "../pages/Home";
+import LoginForm from "../components/LoginForm";
+import SignUpForm from "../components/SignUpForm";
 
 const router = createBrowserRouter([
     {
@@ -29,11 +31,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/auth/login",
-                Component: Login,
+                Component: LoginForm,
             },
             {
                 path: "/auth/sign-up",
-                Component: SignUp,
+                Component: SignUpForm,
             }
 
         ]
