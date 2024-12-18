@@ -9,7 +9,7 @@ import { postAdd } from '../features/adSlice';
 
 const AddPostForm = () => {
 
-    const { loading, error } = useSelector((state) => state.auth)
+    const { loading, error } = useSelector((state) => state.ads)
     const dispatch = useDispatch();
 
     const {

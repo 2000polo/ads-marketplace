@@ -23,8 +23,11 @@ const MyAccount = () => {
     return (
         <Flex gap={'4'} direction={'column'}>
             <ProfileCard />
-            <AdCard />
-            <AdCard />
+            {
+                adsStore.adsList?.map((ad) => {
+                    return <AdCard data={ad} />
+                })
+            }
         </Flex>
     )
 }

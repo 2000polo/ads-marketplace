@@ -51,7 +51,7 @@ const adSlice = createSlice({
             })
             .addCase(getAdPosts.fulfilled, (state, { payload }) => {
                 console.log('priting payload', payload)
-                // state.adsList = pa
+                state.adsList = payload.data
             })
             .addCase(getAdPosts.rejected, (state, action) => {
                 state.loading = false;
